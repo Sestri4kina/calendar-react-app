@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Event from './event';
 
 class Application extends React.Component {
     constructor(props){
@@ -19,6 +20,7 @@ class Application extends React.Component {
                     <h1>Calendar</h1>
                 </header>
                 <section>
+                    <Event />
                     <p>Here goes all the other info and {this.state.value}</p>
                 </section>
                 <footer>
