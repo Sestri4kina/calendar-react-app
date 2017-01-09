@@ -41,16 +41,17 @@ class Event extends React.Component {
 }
 
 //Join button and modal
-var GuestJoins = React.createClass({
-    getInitialState: function() {
-        return { showModal: false };
-    },
-    close: function() {
+class GuestJoins extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state = { showModal: false };
+    }
+    close() {
         globalTitle = "";
         globalInfo = [];
         this.setState({ showModal: false });
-    },
-    open: function() {
+    }
+    open() {
         this.setState({ showModal: true });
         if (document.getElementById("title") && document.getElementById("info")) {
             $("#title").val(globalTitle);
@@ -61,8 +62,8 @@ var GuestJoins = React.createClass({
             }
         }
         else requestAnimationFrame(this.open);
-    },
-    add: function() {
+    }
+    add() {
         var title = document.getElementById("title").value;
         var info = document.getElementById("info").value.split(",");
         var exists = false;
@@ -79,19 +80,19 @@ var GuestJoins = React.createClass({
         }
         update();
         this.close();
-    },
-    render: function() {
+    }
+    render() {
         return (
             <div>
                 <Button
                     bsStyle="primary"
                     bsSize="large"
-                    onClick={this.open}
+                    onClick={this.open.bind(this)}
                     id="show"
                 >
                     Join event
                 </Button>
-                <Modal show={this.state.showModal} onHide={this.close}>
+                <Modal show={this.state.showModal} onHide={this.close.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title id="modalTitle">Join this Event</Modal.Title>
                     </Modal.Header>
@@ -102,14 +103,14 @@ var GuestJoins = React.createClass({
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.add} bsStyle="primary" id="addButton">Join Event</Button>
-                        <Button onClick={this.close}>Close</Button>
+                        <Button onClick={this.add.bind(this)} bsStyle="primary" id="addButton">Join Event</Button>
+                        <Button onClick={this.close.bind(this)}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
         );
     }
-});
+}
 
 //
 
