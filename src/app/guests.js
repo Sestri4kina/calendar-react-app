@@ -16,7 +16,7 @@ var guests = (typeof localStorage["guestBook"] != "undefined") ?
     globalTitle = "", globalInfo = []; // Define global title and info
 
 // GuestBook class. This holds all guests.
-class GuestBook extends React.Component{
+export default class GuestBook extends React.Component{
     render() {
         return (
             <div>
@@ -46,8 +46,8 @@ class Guest extends React.Component{
                 <h4 className="text-center">Info</h4><hr/>
                 <InfoList info={this.props.info} />
                 <ButtonToolbar>
-                    <Button class="delete" bsStyle="danger" id={"btn-del"+this.props.index} onClick={this.remove.bind(this)}>Delete</Button>
-                    <Button bsStyle="default" id={"btn-edit"+this.props.index} onClick={this.edit.bind(this)}>Edit</Button>
+                    <Button bsStyle="danger" key={'btn-del'+this.props.index} id={'btn-del'+this.props.index} onClick={this.remove.bind(this)}>Delete</Button>
+                    <Button bsStyle="default" key={'btn-edit'+this.props.index} id={"btn-edit"+this.props.index} onClick={this.edit.bind(this)}>Edit</Button>
                 </ButtonToolbar>
             </div>
         );
@@ -57,9 +57,9 @@ class Guest extends React.Component{
 // InfoList class. This lists all info for a Guest
 class InfoList extends React.Component{
     render() {
-        var infoList = this.props.info.map(function(dataInfo) {
+        var infoList = this.props.info.map(function(dataInfo, i) {
             return (
-                <ListGroupItem>
+                <ListGroupItem key={'guest_'+i}>
                     {dataInfo}
                 </ListGroupItem>
             );
@@ -78,15 +78,15 @@ module.exports = function update() {
     var rows = [];
     for (var i=0; i < guests.length; i++) {
         rows.push(
-            <Panel header={guests[i].title} eventKey={i} bsStyle="success">
-                <Guest title={guests[i].title} info={guests[i].info} index={i}/>
+            <Panel header={guests[i].title} eventKey={i} bsStyle="success" key={'name_'+i}>
+                <Guest title={guests[i].title} info={guests[i].info} index={i} key={'info_'+i}/>
             </Panel>
         );
     }
     ReactDOM.render(<GuestBook data={rows}/>, document.getElementById("app"));
 };
 
-module.exports = GuestBook;
+
 
 
 

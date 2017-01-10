@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, Link } from 'react-router';
 import { Panel, ListGroup, ListGroupItem, Button, Modal, Input, OverlayTrigger } from 'react-bootstrap';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
+import $ from 'jquery';
 import GuestBook from './guests';
 import update from './guests';
 
@@ -40,7 +41,7 @@ class Event extends React.Component {
     }
 }
 
-//Join button and modal
+//Join button and the modal to add new guest
 class GuestJoins extends React.Component{
     constructor(props) {
         super(props);
@@ -76,7 +77,7 @@ class GuestJoins extends React.Component{
         }
         if (!exists) {
             if (title.length < 1) title = "Untitled";
-            recipes.push({title: title, info: document.getElementById("info").value.split(",")});
+            guests.push({title: title, info: document.getElementById("info").value.split(",")});
         }
         update();
         this.close();
@@ -114,8 +115,8 @@ class GuestJoins extends React.Component{
 
 //
 
-
+update();
 ReactDOM.render(<Application />, document.getElementById('app'));
 
 //ReactDOM.render(<GuestJoins/>, document.getElementById("button"));
-update();
+//update();
